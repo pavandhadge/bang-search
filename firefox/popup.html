@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Edit Bangs</title>
+        <style>
+            /* Modern sans-serif font */
+            body {
+                font-family:
+                    "Inter",
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    Roboto,
+                    sans-serif;
+                background: #f9fafb;
+                color: #333;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+            .table-container {
+                flex: 7; /* Takes up 70% of the screen height */
+                overflow-y: auto;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                margin: 20px;
+                border-radius: 12px;
+            }
+            .edit-container {
+                /* flex: 2;  */
+                display: flex;
+                height: 15%;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+                border-top-left-radius: 12px;
+                border-top-right-radius: 12px;
+            }
+            h3 {
+                color: #1a73e8;
+                font-size: 20px;
+                margin-bottom: 16px;
+                font-weight: 600;
+            }
+            table {
+                width: 80%;
+                border-collapse: collapse;
+                background: white;
+                color: #333;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            th,
+            td {
+                border: 1px solid #e0e0e0;
+                padding: 12px;
+                text-align: left;
+            }
+            th {
+                background-color: #f8f9fa;
+                color: #555;
+                font-weight: 600;
+            }
+            input[type="text"] {
+                width: 25%;
+                padding: 10px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #e0e0e0;
+                border-radius: 6px;
+                box-sizing: border-box;
+                font-size: 14px;
+                transition: border-color 0.2s;
+            }
+            input[type="text"]:focus {
+                border-color: #1a73e8;
+                outline: none;
+            }
+            button {
+                background-color: #1a73e8;
+                color: white;
+                padding: 12px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                width: 100%;
+                font-size: 14px;
+                font-weight: 500;
+                transition: background-color 0.2s;
+            }
+            #saveBang,
+            #refreshButton {
+                background-color: #1a73e8;
+                color: white;
+                padding: 12px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                width: 15%;
+                font-size: 14px;
+                font-weight: 500;
+                transition: background-color 0.2s;
+            }
+            button:hover {
+                background-color: #1557b0;
+            }
+            #refreshButton {
+                background-color: #34a853;
+            }
+            #refreshButton:hover {
+                background-color: #2d8a4a;
+            }
+            .actions {
+                display: flex;
+                gap: 8px;
+            }
+            .actions button {
+                padding: 8px 12px;
+                font-size: 12px;
+                width: auto;
+            }
+            .actions button.edit {
+                background-color: #fbbc05;
+            }
+            .actions button.edit:hover {
+                background-color: #e2a703;
+            }
+            .actions button.delete {
+                background-color: #ea4335;
+            }
+            .actions button.delete:hover {
+                background-color: #c5221f;
+            }
+            label {
+                font-size: 14px;
+                color: #555;
+                font-weight: 500;
+                margin-bottom: 4px;
+                display: block;
+            }
+            /* Smooth scrollbar */
+            .table-container::-webkit-scrollbar {
+                width: 8px;
+            }
+            .table-container::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 4px;
+            }
+            .table-container::-webkit-scrollbar-thumb {
+                background: #888;
+                border-radius: 4px;
+            }
+            .table-container::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+            .edit-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                height: 15%;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+                border-top-left-radius: 12px;
+                border-top-right-radius: 12px;
+                gap: 10px; /* Adds spacing between child elements */
+            }
+
+            .edit-container:hover {
+                box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.15); /* Subtle hover effect */
+            }
+            #banfields {
+                display: flex;
+                width: 100%;
+            }
+            #bangKeyInputContaine {
+                width: 80%;
+                display: flex;
+                flex-direction: column;
+                gap: 4px; /* Adds spacing between label and input */
+            }
+            #bangValueInputContainer {
+                width: 60%;
+                display: flex;
+                flex-direction: column;
+                gap: 4px; /* Adds spacing between label and input */
+            }
+
+            #bangkey,
+            #bangvalue {
+                width: 80%; /* Make inputs take full width */
+                padding: 10px;
+                margin: 0; /* Remove default margin */
+                border: 1px solid #e0e0e0;
+                border-radius: 6px;
+                box-sizing: border-box;
+                font-size: 14px;
+                transition: border-color 0.2s;
+            }
+
+            #bangkey:focus,
+            #bangvalue:focus {
+                border-color: #1a73e8;
+                outline: none;
+            }
+
+            #saveBang,
+            #refreshButton {
+                width: auto; /* Adjust button width to fit content */
+                padding: 10px 20px; /* Slightly smaller padding */
+                margin: 0; /* Remove default margin */
+                font-size: 14px;
+                font-weight: 500;
+                transition: background-color 0.2s;
+            }
+
+            #saveBang:hover,
+            #refreshButton:hover {
+                background-color: #1557b0; /* Consistent hover effect */
+            }
+            .button-container {
+                display: flex;
+                width: 20%;
+                justify-content: space-evenly;
+                padding-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="tableContainer" class="table-container">
+            <h3 id="manageBangsTitle">Manage Bangs</h3>
+            <table id="bangsTable">
+                <thead>
+                    <tr id="tableHeaderRow">
+                        <th id="bangKeyHeader">Bang Key</th>
+                        <th id="urlHeader">URL</th>
+                        <th id="actionsHeader">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example rows (can be dynamically added) -->
+                    <tr id="row1" class="bangRow">
+                        <td id="bangKey1" class="bangKey">g</td>
+                        <td id="bangUrl1" class="bangUrl">
+                            https://google.com/search?q=%s
+                        </td>
+                        <td id="actions1" class="actions">
+                            <button id="edit1" class="edit">Edit</button>
+                            <button id="delete1" class="delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr id="row2" class="bangRow">
+                        <td id="bangKey2" class="bangKey">yt</td>
+                        <td id="bangUrl2" class="bangUrl">
+                            https://youtube.com/results?search_query=%s
+                        </td>
+                        <td id="actions2" class="actions">
+                            <button id="edit2" class="edit">Edit</button>
+                            <button id="delete2" class="delete">Delete</button>
+                        </td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="editContainer" class="edit-container">
+            <h3 id="addEditTitle">Add/Edit Bang</h3>
+            <div id="banfields">
+                <div id="bangKeyInputContainer">
+                    <label id="bangKeyLabel" for="bangkey"
+                        >Enter Bang Key</label
+                    >
+                    <input id="bangkey" type="text" placeholder="e.g., g" />
+                </div>
+                <div id="bangValueInputContainer">
+                    <label id="bangValueLabel" for="bangvalue"
+                        >Enter Bang Value</label
+                    >
+                    <input
+                        id="bangvalue"
+                        type="text"
+                        placeholder="e.g., https://google.com/search?q=%s"
+                    />
+                </div>
+                <div class="button-container">
+                    <label id="bangValueLabel" for="bangvalue"></label>
+                    <button id="saveBang">Save</button>
+                    <label id="bangValueLabel" for="bangvalue"></label>
+                    <!-- <button id="refreshButton">Refresh Browser</button> -->
+                </div>
+            </div>
+        </div>
+
+        <script></script>
+        <script src="popup.js"></script>
+    </body>
+</html>
