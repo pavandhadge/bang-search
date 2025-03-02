@@ -1,5 +1,5 @@
 chrome.browserAction.onClicked.addListener(() => {
-  chrome.tabs.create({ url: chrome.runtime.getURL("popup.html") });
+  chrome.tabs.create({ url: chrome.runtime.getURL("index.html") });
 });
 function loadbangs() {
   chrome.storage.sync.get(["bangs"], (data) => {
