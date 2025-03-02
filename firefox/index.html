@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Edit Bangs</title>
+        <link rel="stylesheet" href="index.html" />
+    </head>
+    <body>
+        <navbar>
+            <div>
+                <img src="#" />
+            </div>
+            <div>
+                <a>link </a>
+                <a>link </a>
+                <a>link </a>
+                <a>link </a>
+                <a>link </a>
+            </div>
+        </navbar>
+
+        <section>
+            <div>
+                <h2>Manage Bangs</h2>
+            </div>
+            <div>
+                <table id="bangsTable">
+                    <thead>
+                        <tr id="tableHeaderRow">
+                            <th id="bangKeyHeader">Bang Key</th>
+                            <th id="urlHeader">URL</th>
+                            <th id="actionsHeader">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Example rows (can be dynamically added) -->
+                        <tr id="row1" class="bangRow">
+                            <td id="bangKey1" class="bangKey">g</td>
+                            <td id="bangUrl1" class="bangUrl">
+                                https://google.com/search?q=%s
+                            </td>
+                            <td id="actions1" class="actions">
+                                <button id="edit1" class="edit">Edit</button>
+                                <button id="delete1" class="delete">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                        <tr id="row2" class="bangRow">
+                            <td id="bangKey2" class="bangKey">yt</td>
+                            <td id="bangUrl2" class="bangUrl">
+                                https://youtube.com/results?search_query=%s
+                            </td>
+                            <td id="actions2" class="actions">
+                                <button id="edit2" class="edit">Edit</button>
+                                <button id="delete2" class="delete">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <div id="editContainer" class="edit-container">
+                <div>
+                    <h3 id="addEditTitle">Add/Edit Bang</h3>
+                </div>
+                <div id="banfields">
+                    <div id="bangKeyInputContainer">
+                        <label id="bangKeyLabel" for="bangkey"
+                            >Enter Bang Key</label
+                        >
+                        <input id="bangkey" type="text" placeholder="e.g., g" />
+                    </div>
+                    <div id="bangValueInputContainer">
+                        <label id="bangValueLabel" for="bangvalue"
+                            >Enter Bang Value</label
+                        >
+                        <input
+                            id="bangvalue"
+                            type="text"
+                            placeholder="e.g., https://google.com/search?q=%s"
+                        />
+                    </div>
+                    <div class="button-container">
+                        <label id="bangValueLabel" for="bangvalue"></label>
+                        <button id="saveBang">Save</button>
+                        <!-- <label id="bangValueLabel" for="bangvalue"></label> -->
+                        <!-- <button id="refreshButton">Refresh Browser</button> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script></script>
+        <script src="popup.js"></script>
+    </body>
+</html>
